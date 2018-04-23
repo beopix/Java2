@@ -10,7 +10,7 @@ public class Main {
 		Vorlesungsverzeichnis a = new Vorlesungsverzeichnis("file.txt");
 		System.out.println(a.titles());
 		
-		System.out.println("");
+		System.out.println("A");
 		
 	}
 }
