@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * @author xps_m
+ */
 
 public class Vorlesungsverzeichnis {
 
@@ -61,7 +64,7 @@ public class Vorlesungsverzeichnis {
 	
 	/**
 	 * Liefert eine alphabetisch sortierte Liste mit den Titeln aller Vorlesungen.
-	 * @return
+	 * @return an alphabetical sorted list of titles
 	 */
 	public List<String> titles(){
 		List<String> result = new ArrayList<String>();
@@ -85,7 +88,7 @@ public class Vorlesungsverzeichnis {
 
 	/**
 	 * Liefert die Menge derjenigen Dozenten, die zwei oder mehr Vorlesungen halten.
-	 * @return
+	 * @return a set of lecturers with two or more lectures
 	 */
 	public Set<String> workaholics() {
 		int counter = 0;
@@ -127,7 +130,7 @@ public class Vorlesungsverzeichnis {
 	 * Liefert eine Map, die Studiengruppen auf Listen von Vorlesungstiteln abbildet.
 	 * Unter dem Schlüssel MT2 wäre für die oben angegebene Datenbasis zum Beispiel als Wert
 	 * die Liste [Mathematik 2, Audio-/Videotechnik] zu finden.
-	 * @return
+	 * @return a map with subject as key and a list of titles of the subject as value
 	 */
 	public Map<String, List<String>> groupToTitles() {
 		Map<String, List<String>> result = new HashMap<>();
@@ -148,16 +151,16 @@ public class Vorlesungsverzeichnis {
 	
 	public Map<String, List<String>> groupToTitlesSet() {
 		Map<String, List<String>> result = new HashMap<>();
-		List<String> subjectList;
+		Set<String> subjectList;
 		
 		for(Vorlesung key : sv) {
-			subjectList = new ArrayList<>();
+			subjectList = new TreeSet<>();
 			for(Vorlesung value : sv) {
 				if(key.getSubject().equals(value.getSubject())) {
 					subjectList.add(value.getTitle());
 				}
 			}
-			result.put(key.getSubject(), subjectList);
+			result.put(key.getSubject(), new ArrayList<>(subjectList));
 		}
 		return result;
 	}
@@ -170,7 +173,7 @@ public class Vorlesungsverzeichnis {
 	 * Entsprechend der obigen Datenbasis würde in diesem Fall nur ein Eintrag
 	 * in der Map stehen mit dem Schlüssel Mathematik 2 und dem Wert [von Coelln, Rabe]
 	 * als Liste.
-	 * @return
+	 * @return a map with title as key and a list of lecturers as value
 	 */
 	
 	public Map<String, List<String>> multipleTitles(){
@@ -197,13 +200,12 @@ public class Vorlesungsverzeichnis {
 	/**
 	 * Liefert eine nach Teilnehmerzahl absteigend(!) sortierte Liste
 	 * mit den Titeln aller Vorlesungen.
-	 * @return
+	 * @return a list of all lecture titles sorted by attendance descending
 	 */
 	
 	public List<String> descendingTitles(){
 		List<Vorlesung> temp = new ArrayList<>();
 		List<String> result = new ArrayList<>();
-		
 		for(Vorlesung v : sv) {
 			temp.add(v);
 		}
