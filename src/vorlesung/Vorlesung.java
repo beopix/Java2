@@ -1,6 +1,8 @@
 package vorlesung;
 
-public class Vorlesung implements Comparable<Vorlesung> {
+import java.util.Comparator;
+
+public class Vorlesung implements Comparable<Vorlesung>, Comparator<Vorlesung> {
 	private String subject;
 	private String title;
 	private String lecturer;
@@ -56,12 +58,21 @@ public class Vorlesung implements Comparable<Vorlesung> {
 
 	@Override
 	public int compareTo(Vorlesung o) {
-		if(subject.compareTo(o.subject)>0)
+		if(subject.compareTo(o.subject)>0 || title.compareTo(o.title)>0 || lecturer.compareTo(o.lecturer)>0)
 			return 1;
 		
-		if(subject.compareTo(o.subject)<0)
+		if(subject.compareTo(o.subject)<0 || title.compareTo(o.title)<0 || lecturer.compareTo(o.lecturer)<0)
 			return -1;
-		return 1;
+		return 0;
+	}
+
+	@Override
+	public int compare(Vorlesung v1, Vorlesung v2) {
+		if(v1.getAttendance()>v2.getAttendance())
+			return 1;
+		if(v1.getAttendance()<v2.getAttendance())
+			return -1;
+		return 0;
 	}
 	
 }

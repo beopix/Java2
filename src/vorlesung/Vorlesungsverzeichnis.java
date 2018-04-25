@@ -30,7 +30,7 @@ public class Vorlesungsverzeichnis {
 	 */
 	public Vorlesungsverzeichnis(String filename) throws IOException, TextFileFormatException {
 		vv = load(filename);
-		sv = new HashSet<>();
+		sv = new TreeSet<>();
 	
 		for(List<String> l : vv) {
 			if(l.size()<4) {
@@ -144,6 +144,23 @@ public class Vorlesungsverzeichnis {
 		}
 		return result;
 	}
+	
+	
+	public Map<String, List<String>> groupToTitlesSet() {
+		Map<String, List<String>> result = new HashMap<>();
+		List<String> subjectList;
+		
+		for(Vorlesung key : sv) {
+			subjectList = new ArrayList<>();
+			for(Vorlesung value : sv) {
+				if(key.getSubject().equals(value.getSubject())) {
+					subjectList.add(value.getTitle());
+				}
+			}
+			result.put(key.getSubject(), subjectList);
+		}
+		return result;
+	}
 
 	/**
 	 * 
@@ -153,9 +170,49 @@ public class Vorlesungsverzeichnis {
 	 * Entsprechend der obigen Datenbasis würde in diesem Fall nur ein Eintrag
 	 * in der Map stehen mit dem Schlüssel Mathematik 2 und dem Wert [von Coelln, Rabe]
 	 * als Liste.
-	 * 
+	 * @return
 	 */
 	
+	public Map<String, List<String>> multipleTitles(){
+		Map<String, List<String>> result = new HashMap<>();
+		Set<String> titleList;
+		
+		for(Vorlesung cmpTo : sv) {
+			titleList = new TreeSet<>();
+			
+			for(Vorlesung v : sv) {
+				if(cmpTo.getTitle().equals(v.getTitle()) && (!cmpTo.getLecturer().equals(v.getLecturer()))) {
+					titleList.add(cmpTo.getLecturer());
+					titleList.add(v.getLecturer());
+				}
+			}
+			if(titleList.size() >= 2) {
+				result.put(cmpTo.getTitle(), new ArrayList<>(titleList));
+			}
+			
+		}
+		return result;
+	}
+	
+	/**
+	 * Liefert eine nach Teilnehmerzahl absteigend(!) sortierte Liste
+	 * mit den Titeln aller Vorlesungen.
+	 * @return
+	 */
+	
+	public List<String> descendingTitles(){
+		List<Vorlesung> temp = new ArrayList<>();
+		List<String> result = new ArrayList<>();
+		
+		for(Vorlesung v : sv) {
+			temp.add(v);
+		}
+		Collections.sort(temp, new Vorlesung().reversed());
+		for(Vorlesung v : temp) {
+			result.add(v.getTitle());
+		}
+		return result;
+	}
 	
 	
 	@Override

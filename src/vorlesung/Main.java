@@ -15,7 +15,12 @@ public class Main {
 	
 		System.out.println(a.workaholics());
 		System.out.println(a.workaholicsSet());
-//		System.out.println(a.groupToTitles());
+		System.out.println(a.groupToTitles());
+		System.out.println(a.groupToTitlesSet());
+		
+		System.out.println(a.multipleTitles());
+		System.out.println(a.descendingTitles());
+
 //		System.out.println(a.groupToTitles().get("MT2"));
 		
 		
