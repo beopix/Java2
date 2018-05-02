@@ -6,3 +6,4 @@ E2:Mathematik 2:Rabe:70
 I2:Java 3:Rump:100
 E2:Mathematik 3:Rabe:70
 E2:Mathematik 2:Clausthaler:70
+I2:Java 2:Rump:100

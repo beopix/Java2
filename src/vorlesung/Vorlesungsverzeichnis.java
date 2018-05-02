@@ -19,8 +19,7 @@ import java.util.TreeSet;
 
 public class Vorlesungsverzeichnis {
 
-	private List<List<String>> vv;
-	
+	private List<List<String>> vv;	
 	private Set<Vorlesung> sv;
 
 	/**
@@ -34,7 +33,7 @@ public class Vorlesungsverzeichnis {
 	public Vorlesungsverzeichnis(String filename) throws IOException, TextFileFormatException {
 		vv = load(filename);
 		sv = new TreeSet<>();
-	
+
 		for(List<String> l : vv) {
 			if(l.size()<4) {
 				throw new TextFileFormatException(0);
@@ -69,7 +68,8 @@ public class Vorlesungsverzeichnis {
 	public List<String> titles(){
 		List<String> result = new ArrayList<String>();
 		for(List<String> l : vv) {
-			result.add(l.get(1));
+			if(!result.contains(l.get(1)))
+				result.add(l.get(1));
 		}
 		Collections.sort(result);
 		return result;

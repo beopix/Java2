@@ -75,4 +75,19 @@ public class Vorlesung implements Comparable<Vorlesung>, Comparator<Vorlesung> {
 		return 0;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(o == null)
+			return false;
+		if(!(o instanceof Vorlesung))
+			return false;
+		Vorlesung v = (Vorlesung) o;
+		if(subject.equals(v.subject) && title.equals(v.title) && lecturer.equals(v.lecturer) && attendance==v.attendance)
+			return true;
+		else
+			return false;
+	}
+	
 }
