@@ -29,7 +29,12 @@ public class Main {
 		}
 		
 		KlausurenServer ks = new KlausurenServer(port);
-		ks.start();
+		try {
+			ks.runKlausurenServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
